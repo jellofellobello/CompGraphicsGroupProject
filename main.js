@@ -1,4 +1,9 @@
-//test
+// Prototype file.
+// index.html now loads setup.js, build.js, animate.js, and run.js instead.
+//
+// TODO:
+// - keep this only as reference while developing the structured version
+// - delete it later if the final submission should contain only active files
 
 var scene;
 var camera;
