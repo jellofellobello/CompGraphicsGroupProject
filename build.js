@@ -91,6 +91,16 @@ function buildLogo() {
 // TODO (GUI Setup)
 function buildGui() {
     gui = new dat.GUI();
+
+    gui.add(window, "laceSelect", {
+        Green: 0,
+        Blue: 1
+        }).name("Lace Style").onChange(function(value) {
+            laceSelect = Number(value);
+
+            scene.remove(shoeModel);
+            buildShoe(laceSelect);
+    });
 }
 
 /* Define the add shapes function.
