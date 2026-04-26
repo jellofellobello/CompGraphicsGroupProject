@@ -70,7 +70,8 @@ function buildShoe(lace) {
 
 }
 
-// TODO
+// This part tests on adding new models to the main model created in buildShoe()
+// We don't need to keep these examples since they're just cubes
 function buildLaces(lacesNum) {
     
     if (lacesNum == 0) {
