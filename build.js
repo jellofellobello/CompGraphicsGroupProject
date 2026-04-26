@@ -4,6 +4,8 @@ var shoeModel;
 var shoeParts = {};
 var gui;
 
+var laceSelect = 1;
+
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
     shoeColor: "#d84a3a",
@@ -38,19 +40,48 @@ function buildPlatform() {
 }
 
 // TODO
-function buildShoe() {
+function buildShoe(lace) {
+
+    shoeModel = new THREE.Group();
+    
     const geometry = new THREE.BoxGeometry(10,10,10);
     var material = createMaterial(0xff0000, 1, 0.4);
 
-    shoeModel = new THREE.Mesh(geometry, material);
+    shoeBody = new THREE.Mesh(geometry, material);
+    shoeBody.receiveShadow = true;
+
+    shoeModel.add(shoeBody);
     shoeModel.position.set(0,3,3);
-    shoeModel.receiveShadow = true;
     scene.add(shoeModel);
+
+    buildLaces(lace);
+
 }
 
 // TODO
-function buildLaces() {
+function buildLaces(lacesNum) {
+    
+    if (lacesNum == 0) {
+        const geometry = new THREE.BoxGeometry(10,10,10);
+        var material = createMaterial(0x00ff00, 1, 0.4);
+        shoeLace1 = new THREE.Mesh(geometry, material);
+        shoeLace1.position.set(0, 3, 5.2);
+        shoeLace1.receiveShadow = true;
+
+        shoeModel.add(shoeLace1);
+    }
+
+    if (lacesNum == 1) {
+        const geometry = new THREE.BoxGeometry(10,10,10);
+        var material = createMaterial(0x0000ff, 1, 0.4);
+        shoeLace2 = new THREE.Mesh(geometry, material);
+        shoeLace2.position.set(0, 3, 5.2);
+        shoeLace2.receiveShadow = true;
+
+        shoeModel.add(shoeLace2);
+    }
 }
+
 
 // TODO
 function buildLogo() {
@@ -69,5 +100,5 @@ function buildGui() {
  */
 function addShapes() {
     buildPlatform();
-    buildShoe();
+    buildShoe(laceSelect);
 }
