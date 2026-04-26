@@ -15,6 +15,18 @@ var shoeSettings = {
     material : "leather",
 };
 
+const modelLoader = new THREE.GLTFLoader();
+
+function modelTest() {
+    modelLoader.load("Assets/Models/Trainer.glb", function(gltf) {
+        shoeModel = gltf.scene;
+        shoeModel.scale.set(3,3,3);
+        shoeModel.position.set(0,3,3);
+
+        scene.add(shoeModel);
+    });
+}
+
 // UTILS
 function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
@@ -110,5 +122,6 @@ function buildGui() {
  */
 function addShapes() {
     buildPlatform();
-    buildShoe(laceSelect);
+    //buildShoe(laceSelect);
+    modelTest();
 }
