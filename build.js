@@ -3,9 +3,6 @@ var platform;
 var shoeParts = {};
 var gui;
 
-var laceSelect = 1;
-
-
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
     bodySelect: 1,
@@ -43,9 +40,12 @@ function buildPlatform() {
     scene.add(platform);
 }
 
+//buildShoe is the main function that is called. The parameters are numbers, and each shoe part of each type is a different number.
+//Effectively, each selection should change the "e.g. body" value to a number; 1 equals the trainer body, 2 will equal a different body.
 function buildShoe(body, laces, sole) {
     clearShoe();
 
+    //Trainer
     if (body == 1 && trainerBody) {
         scene.add(trainerBody);
     }
@@ -57,17 +57,38 @@ function buildShoe(body, laces, sole) {
     if (sole == 1 && trainerSole) {
         scene.add(trainerSole);
     }
+
+    //Dress Shoe
+    if (body == 2 && dressBody) {
+        scene.add(dressBody);
+    }
+
+    if (laces == 2 && dressLaces) {
+        scene.add(dressLaces);
+    }
+
+    if (sole == 2 && dressSole) {
+        scene.add(dressSole);
+    }
 }
 
 function clearShoe() {
     if (trainerBody) scene.remove(trainerBody);
     if (trainerLaces) scene.remove(trainerLaces);
     if (trainerSole) scene.remove(trainerSole);
+
+    if (dressBody) scene.remove(dressBody);
+    if (dressLaces) scene.remove(dressLaces);
+    if (dressSole) scene.remove(dressSole);
 }
 
 function buildBody(bodyNum) {
     if (bodyNum == 1) {
         scene.add(trainerBody);
+    }
+
+    if (bodyNum == 2) {
+        scene.add(dressBody);
     }
 }
 
@@ -75,11 +96,19 @@ function buildLaces(lacesNum) {
     if (lacesNum == 1) {
         scene.add(trainerLaces);
     }
+
+    if (lacesNum == 2) {
+        scene.add(dressLaces);
+    }
 }
 
 function buildSole(soleNum) {
     if (soleNum == 1) {
         scene.add(trainerSole);
+    }
+
+    if (soleNum == 2) {
+        scene.add(dressSole);
     }
 }
 
@@ -94,17 +123,20 @@ function buildGui() {
 
     gui.add(shoeSettings, "bodySelect", {
         None: 0,
-        Trainer: 1
+        Trainer: 1,
+        Dress: 2
     }).name("Body").onChange(updateShoe);
 
     gui.add(shoeSettings, "laceSelect", {
         None: 0,
-        Trainer: 1
+        Trainer: 1,
+        Dress: 2
     }).name("Laces").onChange(updateShoe);
 
     gui.add(shoeSettings, "soleSelect", {
         None: 0,
-        Trainer: 1
+        Trainer: 1,
+        Dress: 2
     }).name("Sole").onChange(updateShoe);
 }
 

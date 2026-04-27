@@ -2,17 +2,21 @@
 var time = 0;
 
 // TODO
+//If new parts added, updated this
 function animateShoe() {
-    if (trainerBody) {
-        trainerBody.rotation.y += 0.006;
-    }
+    const shoeParts = [
+        trainerBody,
+        trainerLaces,
+        trainerSole,
+        dressBody,
+        dressLaces,
+        dressSole
+    ];
 
-    if (trainerLaces) {
-        trainerLaces.rotation.y += 0.006;
-    }
-
-    if (trainerSole) {
-        trainerSole.rotation.y += 0.006;
+    for (let i = 0; i < shoeParts.length; i++) {
+        if (shoeParts[i]) {
+            shoeParts[i].rotation.y += 0.006;
+        }
     }
 }
 

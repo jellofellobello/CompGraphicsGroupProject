@@ -3,6 +3,9 @@ const modelLoader = new THREE.GLTFLoader();
 var trainerBody = null;
 var trainerLaces = null;
 var trainerSole = null;
+var dressBody = null;
+var dressLaces = null;
+var dressSole = null;
 
 function loadModels() {
     let loadedCount = 0;
@@ -10,11 +13,12 @@ function loadModels() {
     function checkAllLoaded() {
         loadedCount++;
 
-        if (loadedCount === 3) {
+        if (loadedCount === 6) {
             updateShoe();
         }
     }
 
+    //Loading trainer parts
     modelLoader.load("Assets/Models/Trainer/TrainerBody.glb", function(gltf) {
         trainerBody = gltf.scene;
         setupModel(trainerBody);
@@ -30,6 +34,25 @@ function loadModels() {
     modelLoader.load("Assets/Models/Trainer/TrainerSole.glb", function(gltf) {
         trainerSole = gltf.scene;
         setupModel(trainerSole);
+        checkAllLoaded();
+    });
+
+    //Loading dress shoe parts
+    modelLoader.load("Assets/Models/Dress/DressBody.glb", function(gltf) {
+        dressBody = gltf.scene;
+        setupModel(dressBody);
+        checkAllLoaded();
+    });
+
+    modelLoader.load("Assets/Models/Dress/DressLaces.glb", function(gltf) {
+        dressLaces = gltf.scene;
+        setupModel(dressLaces);
+        checkAllLoaded();
+    });
+
+    modelLoader.load("Assets/Models/Dress/DressSole.glb", function(gltf) {
+        dressSole = gltf.scene;
+        setupModel(dressSole);
         checkAllLoaded();
     });
 }
