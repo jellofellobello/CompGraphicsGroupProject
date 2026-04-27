@@ -3,8 +3,17 @@ var time = 0;
 
 // TODO
 function animateShoe() {
-    if (!shoeModel) return;
-    shoeModel.rotation.y += 0.006;
+    if (trainerBody) {
+        trainerBody.rotation.y += 0.006;
+    }
+
+    if (trainerLaces) {
+        trainerLaces.rotation.y += 0.006;
+    }
+
+    if (trainerSole) {
+        trainerSole.rotation.y += 0.006;
+    }
 }
 
 // TODO

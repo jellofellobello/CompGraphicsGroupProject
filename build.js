@@ -1,31 +1,23 @@
 /* Declare the customiser objects. */
 var platform;
-var shoeModel;
 var shoeParts = {};
 var gui;
 
 var laceSelect = 1;
 
+
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
+    bodySelect: 1,
+    laceSelect: 1,
+    soleSelect: 1,
+
     shoeColor: "#d84a3a",
     soleColor: "#f2f2ec",
     laceColor: "#202020",
     logoColor: "#2166f3",
     material : "leather",
 };
-
-const modelLoader = new THREE.GLTFLoader();
-
-function modelTest() {
-    modelLoader.load("Assets/Models/Trainer.glb", function(gltf) {
-        shoeModel = gltf.scene;
-        shoeModel.scale.set(3,3,3);
-        shoeModel.position.set(0,3,3);
-
-        scene.add(shoeModel);
-    });
-}
 
 // UTILS
 function clamp(value, min, max) {
@@ -51,50 +43,45 @@ function buildPlatform() {
     scene.add(platform);
 }
 
-// TODO
-function buildShoe(lace) {
+function buildShoe(body, laces, sole) {
+    clearShoe();
 
-    shoeModel = new THREE.Group();
-    
-    const geometry = new THREE.BoxGeometry(10,10,10);
-    var material = createMaterial(0xff0000, 1, 0.4);
+    if (body == 1 && trainerBody) {
+        scene.add(trainerBody);
+    }
 
-    shoeBody = new THREE.Mesh(geometry, material);
-    shoeBody.receiveShadow = true;
+    if (laces == 1 && trainerLaces) {
+        scene.add(trainerLaces);
+    }
 
-    shoeModel.add(shoeBody);
-    shoeModel.position.set(0,3,3);
-    scene.add(shoeModel);
-
-    buildLaces(lace);
-
+    if (sole == 1 && trainerSole) {
+        scene.add(trainerSole);
+    }
 }
 
-// This part tests on adding new models to the main model created in buildShoe()
-// We don't need to keep these examples since they're just cubes
+function clearShoe() {
+    if (trainerBody) scene.remove(trainerBody);
+    if (trainerLaces) scene.remove(trainerLaces);
+    if (trainerSole) scene.remove(trainerSole);
+}
+
+function buildBody(bodyNum) {
+    if (bodyNum == 1) {
+        scene.add(trainerBody);
+    }
+}
+
 function buildLaces(lacesNum) {
-    
-    if (lacesNum == 0) {
-        const geometry = new THREE.BoxGeometry(10,10,10);
-        var material = createMaterial(0x00ff00, 1, 0.4);
-        shoeLace1 = new THREE.Mesh(geometry, material);
-        shoeLace1.position.set(0, 3, 5.2);
-        shoeLace1.receiveShadow = true;
-
-        shoeModel.add(shoeLace1);
-    }
-
     if (lacesNum == 1) {
-        const geometry = new THREE.BoxGeometry(10,10,10);
-        var material = createMaterial(0x0000ff, 1, 0.4);
-        shoeLace2 = new THREE.Mesh(geometry, material);
-        shoeLace2.position.set(0, 3, 5.2);
-        shoeLace2.receiveShadow = true;
-
-        shoeModel.add(shoeLace2);
+        scene.add(trainerLaces);
     }
 }
 
+function buildSole(soleNum) {
+    if (soleNum == 1) {
+        scene.add(trainerSole);
+    }
+}
 
 // TODO
 function buildLogo() {
@@ -105,15 +92,28 @@ function buildLogo() {
 function buildGui() {
     gui = new dat.GUI();
 
-    gui.add(window, "laceSelect", {
-        Green: 0,
-        Blue: 1
-        }).name("Lace Style").onChange(function(value) {
-            laceSelect = Number(value);
+    gui.add(shoeSettings, "bodySelect", {
+        None: 0,
+        Trainer: 1
+    }).name("Body").onChange(updateShoe);
 
-            scene.remove(shoeModel);
-            buildShoe(laceSelect);
-    });
+    gui.add(shoeSettings, "laceSelect", {
+        None: 0,
+        Trainer: 1
+    }).name("Laces").onChange(updateShoe);
+
+    gui.add(shoeSettings, "soleSelect", {
+        None: 0,
+        Trainer: 1
+    }).name("Sole").onChange(updateShoe);
+}
+
+function updateShoe() {
+    buildShoe(
+        Number(shoeSettings.bodySelect),
+        Number(shoeSettings.laceSelect),
+        Number(shoeSettings.soleSelect)
+    );
 }
 
 /* Define the add shapes function.
@@ -123,6 +123,5 @@ function buildGui() {
  */
 function addShapes() {
     buildPlatform();
-    //buildShoe(laceSelect);
-    modelTest();
+    loadModels();
 }

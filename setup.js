@@ -34,7 +34,7 @@ function setScene() {
     controls.target.set(0, 4, 0);
 
     addLights();
-    addPointerEvents();
+    //addPointerEvents();
 }
 
 // Add lighting
