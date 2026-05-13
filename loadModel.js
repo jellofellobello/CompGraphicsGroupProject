@@ -3,9 +3,14 @@ const modelLoader = new THREE.GLTFLoader();
 var trainerBody = null;
 var trainerLaces = null;
 var trainerSole = null;
+
 var dressBody = null;
 var dressLaces = null;
 var dressSole = null;
+
+var streewearBody = null;
+var streewearLaces = null;
+var streetwearSole = null;
 
 function loadModels() {
     let loadedCount = 0;
@@ -13,7 +18,7 @@ function loadModels() {
     function checkAllLoaded() {
         loadedCount++;
 
-        if (loadedCount === 6) {
+        if (loadedCount === 9) {
             updateShoe();
         }
     }
@@ -53,6 +58,25 @@ function loadModels() {
     modelLoader.load("Assets/Models/Dress/DressSole.glb", function(gltf) {
         dressSole = gltf.scene;
         setupModel(dressSole);
+        checkAllLoaded();
+    });
+
+    //Loading Angelo's Shoe Parts (Streetwear Shoe)
+    modelLoader.load("Assets/Models/AngeloShoe/AngeloBody.glb", function(gltf) {
+        streewearBody = gltf.scene;
+        setupModel(streewearBody);
+        checkAllLoaded();
+    });
+
+    modelLoader.load("Assets/Models/AngeloShoe/AngeloLaces.glb", function(gltf) {
+        streewearLaces = gltf.scene;
+        setupModel(streewearLaces);
+        checkAllLoaded();
+    });
+
+    modelLoader.load("Assets/Models/AngeloShoe/AngeloSole.glb", function(gltf) {
+        streetwearSole = gltf.scene;
+        setupModel(streetwearSole);
         checkAllLoaded();
     });
 }

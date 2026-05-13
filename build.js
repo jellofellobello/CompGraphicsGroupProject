@@ -70,6 +70,19 @@ function buildShoe(body, laces, sole) {
     if (sole == 2 && dressSole) {
         scene.add(dressSole);
     }
+
+    //Streetwear
+    if (body == 3 && streewearBody) {
+        scene.add(streewearBody);
+    }
+
+    if (laces == 3 && streewearLaces) {
+        scene.add(streewearLaces);
+    }
+
+    if (sole == 3 && streetwearSole) {
+        scene.add(streetwearSole);
+    }
 }
 
 function clearShoe() {
@@ -80,6 +93,10 @@ function clearShoe() {
     if (dressBody) scene.remove(dressBody);
     if (dressLaces) scene.remove(dressLaces);
     if (dressSole) scene.remove(dressSole);
+
+    if (streewearBody) scene.remove(streewearBody);
+    if (streewearLaces) scene.remove(streewearLaces);
+    if (streetwearSole) scene.remove(streetwearSole);
 }
 
 function buildBody(bodyNum) {
@@ -89,6 +106,10 @@ function buildBody(bodyNum) {
 
     if (bodyNum == 2) {
         scene.add(dressBody);
+    }
+
+    if (bodyNum == 3) {
+        scene.add(streewearBody);
     }
 }
 
@@ -100,6 +121,10 @@ function buildLaces(lacesNum) {
     if (lacesNum == 2) {
         scene.add(dressLaces);
     }
+
+    if (lacesNum == 3) {
+        scene.add(streewearLaces);
+    }
 }
 
 function buildSole(soleNum) {
@@ -110,6 +135,11 @@ function buildSole(soleNum) {
     if (soleNum == 2) {
         scene.add(dressSole);
     }
+
+    if (soleNum == 3) {
+        scene.add(streetwearSole);
+    }
+
 }
 
 // TODO
@@ -124,19 +154,22 @@ function buildGui() {
     gui.add(shoeSettings, "bodySelect", {
         None: 0,
         Trainer: 1,
-        Dress: 2
+        Dress: 2,
+        Streetwear: 3
     }).name("Body").onChange(updateShoe);
 
     gui.add(shoeSettings, "laceSelect", {
         None: 0,
         Trainer: 1,
-        Dress: 2
+        Dress: 2,
+        Streetwear: 3
     }).name("Laces").onChange(updateShoe);
 
     gui.add(shoeSettings, "soleSelect", {
         None: 0,
         Trainer: 1,
-        Dress: 2
+        Dress: 2,
+        Streetwear: 3
     }).name("Sole").onChange(updateShoe);
 }
 

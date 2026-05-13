@@ -10,7 +10,10 @@ function animateShoe() {
         trainerSole,
         dressBody,
         dressLaces,
-        dressSole
+        dressSole,
+        streewearBody,
+        streewearLaces,
+        streetwearSole
     ];
 
     for (let i = 0; i < shoeParts.length; i++) {
