@@ -14,7 +14,7 @@ var controls;
 var isDragging = false;
 var shoeModel;
 
-function setScene() {
+function setScene(){
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xFAF5EF);
 
@@ -35,19 +35,19 @@ function setScene() {
   document.body.appendChild(renderer.domElement);
 
   //shoe controls
-  renderer.domElement.addEventListener("mousedown", function(event) {
-  if (event.button === 0) {
+  renderer.domElement.addEventListener("mousedown", function(event){
+  if (event.button === 0){
     isDragging = true;
         }
     });
 
-renderer.domElement.addEventListener("mouseup", function(event) {
-  if (event.button === 0) {
+renderer.domElement.addEventListener("mouseup", function(event){
+  if (event.button === 0){
     isDragging = false;
         }
     });
 
-renderer.domElement.addEventListener("mousemove", function(event) {
+renderer.domElement.addEventListener("mousemove", function(event){
   if (!isDragging) return;
 
   shoeModel.rotation.y += event.movementX * 0.01;
@@ -60,14 +60,14 @@ renderer.domElement.addEventListener("mousemove", function(event) {
   window.addEventListener("resize", onWindowResize);
 }
 
-function onWindowResize() {
+function onWindowResize(){
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 //The Shoe will float above this platform; imagine like the platform in the Fortnite customisation screen.
-function createShoePlatform() {
+function createShoePlatform(){
     const geometry = new THREE.CylinderGeometry(20,20,0.5,50,1,false);
     const material = new THREE.MeshBasicMaterial({
         color: 0x595959,
@@ -80,7 +80,7 @@ function createShoePlatform() {
     scene.add(shoePlatform);
 }
 
-function createShoe(/*Maybe theses variables can be SoleType, LaceType, ColourChoice, etc*/) {
+function createShoe(/*Maybe theses variables can be SoleType, LaceType, ColourChoice, etc*/){
     //for now the shoe is just a box
     const geometry = new THREE.BoxGeometry(10,10,10);
     const material = new THREE.MeshStandardMaterial({
@@ -94,7 +94,7 @@ function createShoe(/*Maybe theses variables can be SoleType, LaceType, ColourCh
     scene.add(shoeModel);
 }
 
-function animate() {
+function animate(){
     renderer.render(scene, camera);
 }
 

@@ -6,7 +6,7 @@
  * - render the first frame
  * - start the animation loop
  */
-function run() {
+function run(){
     setScene();
     addShapes();
     buildGui();

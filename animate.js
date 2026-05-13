@@ -2,37 +2,36 @@
 var time = 0;
 
 // TODO
-//If new parts added, updated this
-function animateShoe() {
+// If new parts are added, update this.
+function animateShoe(){
     if (!shoeGroup) return;
 
-    if (!isDraggingShoe) {
-        if (autoRotateEnabled) {
+    if (!isDraggingShoe){
+        if (autoRotateEnabled){
             shoeGroup.rotation.y += autoRotateSpeed;
         }
 
         shoeGroup.rotation.y += dragRotationVelocity;
         dragRotationVelocity *= 0.92;
 
-        if (Math.abs(dragRotationVelocity) < 0.00005) {
+        if (Math.abs(dragRotationVelocity) < 0.00005){
             dragRotationVelocity = 0;
         }
     }
 }
 
-// TODO
-function animatePlatform() {
-    if (!platform) return;
-    platform.rotation.y += 0.003;
+function animateRotatingBase(){
+    if (!rotatingBase) return;
+    rotatingBase.rotation.y += 0.0022;
 }
 
 /* Main animation loop. */
-function animate() {
+function animate(){
     requestAnimationFrame(animate);
 
     time += 0.01;
     animateShoe();
-    animatePlatform();
+    animateRotatingBase();
 
     controls.update();
     renderer.render(scene, camera);
