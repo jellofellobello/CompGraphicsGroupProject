@@ -1,14 +1,13 @@
 /* Declare the customiser objects. */
 var platform;
-var shoeParts = {};
+var shoeGroup;
 var gui;
+var autoRotateEnabled = true;
+var autoRotateSpeed = 0.0035;
+var dragRotationVelocity = 0;
 
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
-    bodySelect: 1,
-    laceSelect: 1,
-    soleSelect: 1,
-
     shoeColor: "#d84a3a",
     soleColor: "#f2f2ec",
     laceColor: "#202020",
@@ -29,6 +28,27 @@ function createMaterial(color, roughness, metalness) {
     });
 }
 
+function recolorModelPart(root, color, roughness, metalness) {
+    if (!root) return;
+
+    root.traverse(function(child) {
+        if (!child.isMesh || !child.material) {
+            return;
+        }
+
+        child.material = child.material.clone();
+        child.material.color.set(color);
+        child.material.roughness = roughness;
+        child.material.metalness = metalness;
+    });
+}
+
+function applyShoeColors() {
+    recolorModelPart(streewearBody, shoeSettings.shoeColor, 0.58, 0.08);
+    recolorModelPart(streewearLaces, shoeSettings.laceColor, 0.92, 0.02);
+    recolorModelPart(streetwearSole, shoeSettings.soleColor, 0.82, 0.03);
+}
+
 // SHOE PLATFORM
 function buildPlatform() {
     var geometry = new THREE.CylinderGeometry(18, 18, 1.2, 72);
@@ -40,145 +60,19 @@ function buildPlatform() {
     scene.add(platform);
 }
 
-//buildShoe is the main function that is called. The parameters are numbers, and each shoe part of each type is a different number.
-//Effectively, each selection should change the "e.g. body" value to a number; 1 equals the trainer body, 2 will equal a different body.
-function buildShoe(body, laces, sole) {
-    clearShoe();
-
-    //Trainer
-    if (body == 1 && trainerBody) {
-        scene.add(trainerBody);
-    }
-
-    if (laces == 1 && trainerLaces) {
-        scene.add(trainerLaces);
-    }
-
-    if (sole == 1 && trainerSole) {
-        scene.add(trainerSole);
-    }
-
-    //Dress Shoe
-    if (body == 2 && dressBody) {
-        scene.add(dressBody);
-    }
-
-    if (laces == 2 && dressLaces) {
-        scene.add(dressLaces);
-    }
-
-    if (sole == 2 && dressSole) {
-        scene.add(dressSole);
-    }
-
-    //Streetwear
-    if (body == 3 && streewearBody) {
-        scene.add(streewearBody);
-    }
-
-    if (laces == 3 && streewearLaces) {
-        scene.add(streewearLaces);
-    }
-
-    if (sole == 3 && streetwearSole) {
-        scene.add(streetwearSole);
-    }
-}
-
-function clearShoe() {
-    if (trainerBody) scene.remove(trainerBody);
-    if (trainerLaces) scene.remove(trainerLaces);
-    if (trainerSole) scene.remove(trainerSole);
-
-    if (dressBody) scene.remove(dressBody);
-    if (dressLaces) scene.remove(dressLaces);
-    if (dressSole) scene.remove(dressSole);
-
-    if (streewearBody) scene.remove(streewearBody);
-    if (streewearLaces) scene.remove(streewearLaces);
-    if (streetwearSole) scene.remove(streetwearSole);
-}
-
-function buildBody(bodyNum) {
-    if (bodyNum == 1) {
-        scene.add(trainerBody);
-    }
-
-    if (bodyNum == 2) {
-        scene.add(dressBody);
-    }
-
-    if (bodyNum == 3) {
-        scene.add(streewearBody);
-    }
-}
-
-function buildLaces(lacesNum) {
-    if (lacesNum == 1) {
-        scene.add(trainerLaces);
-    }
-
-    if (lacesNum == 2) {
-        scene.add(dressLaces);
-    }
-
-    if (lacesNum == 3) {
-        scene.add(streewearLaces);
-    }
-}
-
-function buildSole(soleNum) {
-    if (soleNum == 1) {
-        scene.add(trainerSole);
-    }
-
-    if (soleNum == 2) {
-        scene.add(dressSole);
-    }
-
-    if (soleNum == 3) {
-        scene.add(streetwearSole);
-    }
-
-}
-
-// TODO
-function buildLogo() {
-    
-}
-
-// TODO (GUI Setup)
+// GUI Setup
 function buildGui() {
     gui = new dat.GUI();
 
-    gui.add(shoeSettings, "bodySelect", {
-        None: 0,
-        Trainer: 1,
-        Dress: 2,
-        Streetwear: 3
-    }).name("Body").onChange(updateShoe);
+    var colourFolder = gui.addFolder("Colours");
+    colourFolder.addColor(shoeSettings, "shoeColor").name("Body").onChange(applyShoeColors);
+    colourFolder.addColor(shoeSettings, "laceColor").name("Laces").onChange(applyShoeColors);
+    colourFolder.addColor(shoeSettings, "soleColor").name("Sole").onChange(applyShoeColors);
+    colourFolder.open();
 
-    gui.add(shoeSettings, "laceSelect", {
-        None: 0,
-        Trainer: 1,
-        Dress: 2,
-        Streetwear: 3
-    }).name("Laces").onChange(updateShoe);
-
-    gui.add(shoeSettings, "soleSelect", {
-        None: 0,
-        Trainer: 1,
-        Dress: 2,
-        Streetwear: 3
-    }).name("Sole").onChange(updateShoe);
-}
-
-function updateShoe() {
-    buildShoe(
-        Number(shoeSettings.bodySelect),
-        Number(shoeSettings.laceSelect),
-        Number(shoeSettings.soleSelect)
-    );
+    var rotationFolder = gui.addFolder("Rotation");
+    rotationFolder.add(window, "autoRotateEnabled").name("Auto Rotate");
+    rotationFolder.add(window, "autoRotateSpeed", 0.0, 0.02).step(0.0005).name("Speed");
 }
 
 /* Define the add shapes function.
@@ -188,5 +82,8 @@ function updateShoe() {
  */
 function addShapes() {
     buildPlatform();
+    shoeGroup = new THREE.Group();
+    shoeGroup.position.set(0, 3, 3);
+    scene.add(shoeGroup);
     loadModels();
 }

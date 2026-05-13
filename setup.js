@@ -34,7 +34,7 @@ function setScene() {
     controls.target.set(0, 4, 0);
 
     addLights();
-    //addPointerEvents();
+    addPointerEvents();
 }
 
 // Add lighting
@@ -60,6 +60,7 @@ function addPointerEvents() {
         previousMouse.x = event.clientX;
         previousMouse.y = event.clientY;
         controls.enabled = false;
+        dragRotationVelocity = 0;
     });
 
     window.addEventListener("mouseup", function() {
@@ -76,6 +77,7 @@ function addPointerEvents() {
         shoeGroup.rotation.y += deltaX * 0.01;
         shoeGroup.rotation.x += deltaY * 0.006;
         shoeGroup.rotation.x = clamp(shoeGroup.rotation.x, -0.35, 0.35);
+        dragRotationVelocity = deltaX * 0.0008;
 
         previousMouse.x = event.clientX;
         previousMouse.y = event.clientY;

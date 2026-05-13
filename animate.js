@@ -4,21 +4,18 @@ var time = 0;
 // TODO
 //If new parts added, updated this
 function animateShoe() {
-    const shoeParts = [
-        trainerBody,
-        trainerLaces,
-        trainerSole,
-        dressBody,
-        dressLaces,
-        dressSole,
-        streewearBody,
-        streewearLaces,
-        streetwearSole
-    ];
+    if (!shoeGroup) return;
 
-    for (let i = 0; i < shoeParts.length; i++) {
-        if (shoeParts[i]) {
-            shoeParts[i].rotation.y += 0.006;
+    if (!isDraggingShoe) {
+        if (autoRotateEnabled) {
+            shoeGroup.rotation.y += autoRotateSpeed;
+        }
+
+        shoeGroup.rotation.y += dragRotationVelocity;
+        dragRotationVelocity *= 0.92;
+
+        if (Math.abs(dragRotationVelocity) < 0.00005) {
+            dragRotationVelocity = 0;
         }
     }
 }
