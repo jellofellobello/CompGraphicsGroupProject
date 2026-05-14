@@ -1,8 +1,6 @@
 // Global time variable for customiser animation.
 var time = 0;
 
-// TODO
-// If new parts are added, update this.
 function animateShoe(){
     if (!shoeGroup) return;
 

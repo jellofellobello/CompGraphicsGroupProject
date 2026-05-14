@@ -67,9 +67,9 @@ function getMaterialPreset(){
     }
 
     return {
-        body: { roughness: 0.58, metalness: 0.08 },
-        laces: { roughness: 0.92, metalness: 0.02 },
-        sole: { roughness: 0.82, metalness: 0.03 }
+        body: {roughness: 0.58, metalness: 0.08},
+        laces: {roughness: 0.92, metalness: 0.02} ,
+        sole: {roughness: 0.82, metalness: 0.03}
     };
 }
 
