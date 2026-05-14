@@ -73,7 +73,7 @@ function getMaterialPreset(){
     };
 }
 
-function applyShoeColors(){
+function applySettings(){
     var preset = getMaterialPreset();
 
     recolorModelPart(streewearBody, shoeSettings.shoeColor, preset.body.roughness, preset.body.metalness);
@@ -154,17 +154,17 @@ function buildGui(){
 
     shoeColorInput.addEventListener("input", function(event){
         shoeSettings.shoeColor = event.target.value;
-        applyShoeColors();
+        applySettings();
     });
 
     laceColorInput.addEventListener("input", function(event){
         shoeSettings.laceColor = event.target.value;
-        applyShoeColors();
+        applySettings();
     });
 
     soleColorInput.addEventListener("input", function(event){
         shoeSettings.soleColor = event.target.value;
-        applyShoeColors();
+        applySettings();
     });
 
     autoRotateToggle.addEventListener("change", function(event){
@@ -177,7 +177,7 @@ function buildGui(){
 
     materialSelect.addEventListener("change", function(event){
         shoeSettings.material = event.target.value;
-        applyShoeColors();
+        applySettings();
     });
 }
 

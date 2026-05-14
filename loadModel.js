@@ -15,7 +15,7 @@ function loadModels(){
             shoeGroup.add(streewearLaces);
             shoeGroup.add(streetwearSole);
             alignShoeToBase();
-            applyShoeColors();
+            applySettings();
         }
     }
 
