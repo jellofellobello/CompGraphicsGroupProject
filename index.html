@@ -216,7 +216,6 @@
         }
     </style>
 
-    <!-- External dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -230,7 +229,6 @@
 
         <aside class="ui-shell">
 
-            <!-- MAIN PAGE -->
             <div id="mainPage" class="menu-page active">
 
                 <p class="eyebrow">Product Viewer</p>
@@ -305,7 +303,6 @@
             </div>
 
 
-            <!-- BODY PAGE -->
             <div id="bodyPage" class="menu-page">
 
                 <button class="back-button" onclick="showPage('mainPage')">
@@ -322,10 +319,21 @@
 
                     <h2>Body Options</h2>
 
-                    <button class="option-button">Body Option 1</button>
-                    <button class="option-button">Body Option 2</button>
-                    <button class="option-button">Body Option 3</button>
-                    <button class="option-button">Body Option 4</button>
+                    <button class="option-button" onclick="setBody(0)">
+                        Body Option 1
+                    </button>
+
+                    <button class="option-button" onclick="setBody(1)">
+                        Body Option 2
+                    </button>
+
+                    <button class="option-button" onclick="setBody(2)">
+                        Body Option 3
+                    </button>
+
+                    <button class="option-button" onclick="setBody(3)">
+                        Body Option 4
+                    </button>   
 
                 </section>
 
@@ -343,7 +351,6 @@
             </div>
 
 
-            <!-- LACES PAGE -->
             <div id="lacesPage" class="menu-page">
 
                 <button class="back-button" onclick="showPage('mainPage')">
@@ -360,10 +367,21 @@
 
                     <h2>Lace Options</h2>
 
-                    <button class="option-button">Laces Option 1</button>
-                    <button class="option-button">Laces Option 2</button>
-                    <button class="option-button">Laces Option 3</button>
-                    <button class="option-button">Laces Option 4</button>
+                    <button class="option-button" onclick="setLaces(0)">
+                        Laces Option 1
+                    </button>
+
+                    <button class="option-button" onclick="setLaces(1)">
+                        Laces Option 2
+                    </button>
+
+                    <button class="option-button" onclick="setLaces(2)">
+                        Laces Option 3
+                    </button>
+
+                    <button class="option-button" onclick="setLaces(3)">
+                        Laces Option 4
+                    </button>
 
                 </section>
 
@@ -381,7 +399,6 @@
             </div>
 
 
-            <!-- SOLE PAGE -->
             <div id="solePage" class="menu-page">
 
                 <button class="back-button" onclick="showPage('mainPage')">
@@ -398,10 +415,21 @@
 
                     <h2>Sole Options</h2>
 
-                    <button class="option-button">Sole Option 1</button>
-                    <button class="option-button">Sole Option 2</button>
-                    <button class="option-button">Sole Option 3</button>
-                    <button class="option-button">Sole Option 4</button>
+                    <button class="option-button" onclick="setSole(0)">
+                        Sole Option 1
+                    </button>
+
+                    <button class="option-button" onclick="setSole(1)">
+                        Sole Option 2
+                    </button>
+
+                    <button class="option-button" onclick="setSole(2)">
+                        Sole Option 3
+                    </button>
+
+                    <button class="option-button" onclick="setSole(3)">
+                        Sole Option 4
+                    </button>
 
                 </section>
 
@@ -440,6 +468,24 @@
         });
 
         document.getElementById(pageId).classList.add("active");
+    }
+
+    function setBody(value){
+        bodySelect = value;
+        updateShoeModel();
+        console.log("Body:", bodySelect);
+    }
+
+    function setLaces(value){
+        laceSelect = value;
+        updateShoeModel();
+        console.log("Laces:", laceSelect);
+    }
+
+    function setSole(value){
+        soleSelect = value;
+        updateShoeModel();
+        console.log("Sole:", soleSelect);
     }
 
 </script>

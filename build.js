@@ -74,14 +74,46 @@ function getMaterialPreset(){
 }
 
 function applySettings(){
+
+    
+}
+
+function applySettings(){
     var preset = getMaterialPreset();
 
-    recolorModelPart(streewearBody, shoeSettings.shoeColor, preset.body.roughness, preset.body.metalness);
+    for (var i = 0; i < shoeModelBody.length; i++){
+        recolorModelPart(
+            shoeModelBody[i],
+            shoeSettings.shoeColor,
+            preset.body.roughness,
+            preset.body.metalness
+        );
+    }
+
+    for (var i = 0; i < shoeModelLaces.length; i++){
+        recolorModelPart(
+            shoeModelLaces[i],
+            shoeSettings.laceColor,
+            preset.laces.roughness,
+            preset.laces.metalness
+        );
+    }
+
+    for (var i = 0; i < shoeModelSole.length; i++){
+        recolorModelPart(
+            shoeModelSole[i],
+            shoeSettings.soleColor,
+            preset.sole.roughness,
+            preset.sole.metalness
+        );
+    }
+
+    /*recolorModelPart(streewearBody, shoeSettings.shoeColor, preset.body.roughness, preset.body.metalness);
     recolorModelPart(streewearLaces, shoeSettings.laceColor, preset.laces.roughness, preset.laces.metalness);
     recolorModelPart(streetwearSole, shoeSettings.soleColor, preset.sole.roughness, preset.sole.metalness);
 
     recolorModelPart(dressBody, shoeSettings.laceColor, preset.laces.roughness, preset.laces.metalness);
-    recolorModelPart(dressSole, shoeSettings.soleColor, preset.sole.roughness, preset.sole.metalness);
+    recolorModelPart(dressSole, shoeSettings.soleColor, preset.sole.roughness, preset.sole.metalness);*/
 }
 
 function alignShoeToBase(){
