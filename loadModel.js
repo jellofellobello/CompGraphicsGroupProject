@@ -4,6 +4,9 @@ var streewearBody = null;
 var streewearLaces = null;
 var streetwearSole = null;
 
+var dressBody = null;
+var dressSole = null;
+
 function loadModels(){
     var loadedCount = 0;
 
@@ -35,6 +38,19 @@ function loadModels(){
     modelLoader.load("Assets/Models/AngeloShoe/AngeloSole.glb", function(gltf){
         streetwearSole = gltf.scene;
         setupModel(streetwearSole);
+        checkAllLoaded();
+    });
+
+    //Dress Shoe
+    modelLoader.load("Assets/Models/AngeloDress/AngeloDressBody.glb", function(gltf){
+        dressBody = gltf.scene;
+        setupModel(dressBody);
+        checkAllLoaded();
+    });
+
+    modelLoader.load("Assets/Models/AngeloDress/AngeloDressSole.glb", function(gltf){
+        dressSole = gltf.scene;
+        setupModel(dressSole);
         checkAllLoaded();
     });
 }

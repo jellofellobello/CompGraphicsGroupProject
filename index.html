@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoe Customiser</title>
     <link rel="icon" href="data:,">
+
     <style>
         :root {
             --panel-bg: rgba(255, 249, 242, 0.88);
@@ -149,12 +150,54 @@
             justify-content: space-between;
         }
 
-        .hint {
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(70, 56, 44, 0.1);
-            font-size: 0.88rem;
-            color: var(--text-muted);
+        .menu-page {
+            display: none;
+        }
+
+        .menu-page.active {
+            display: block;
+        }
+
+        .menu-button,
+        .option-button,
+        .back-button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 14px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .menu-button {
+            background: var(--accent);
+            color: white;
+        }
+
+        .menu-button:hover {
+            opacity: 0.92;
+        }
+
+        .option-button {
+            background: rgba(255,255,255,0.95);
+            color: var(--text-main);
+            border: 1px solid rgba(70,56,44,0.14);
+        }
+
+        .option-button:hover {
+            background: rgba(255,255,255,1);
+        }
+
+        .back-button {
+            width: auto;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            background: rgba(255,255,255,0.95);
+            color: var(--text-main);
+            border: 1px solid rgba(70,56,44,0.14);
         }
 
         @media (max-width: 720px) {
@@ -178,64 +221,234 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
+
 <body>
-    <div class="app-shell">
-        <div class="ui-zone">
-            <aside class="ui-shell">
+
+<div class="app-shell">
+
+    <div class="ui-zone">
+
+        <aside class="ui-shell">
+
+            <!-- MAIN PAGE -->
+            <div id="mainPage" class="menu-page active">
+
                 <p class="eyebrow">Product Viewer</p>
+
                 <h1>Shoe Customiser</h1>
-                <p>Adjust the colours, change the rotation speed, and drag the model to inspect it from any angle.</p>
+
+                <p>
+                    Select which part of the shoe you would like to customise.
+                </p>
 
                 <section class="panel-group">
-                    <h2>Colour Finish</h2>
-                    <div class="control">
-                        <label for="shoeColorInput">Upper</label>
-                        <input id="shoeColorInput" type="color" value="#d84a3a">
-                    </div>
-                    <div class="control">
-                        <label for="laceColorInput">Laces</label>
-                        <input id="laceColorInput" type="color" value="#202020">
-                    </div>
-                    <div class="control">
-                        <label for="soleColorInput">Sole</label>
-                        <input id="soleColorInput" type="color" value="#f2f2ec">
-                    </div>
+
+                    <h2>Customise Shoe</h2>
+
+                    <button class="menu-button" onclick="showPage('bodyPage')">
+                        Shoe Body
+                    </button>
+
+                    <button class="menu-button" onclick="showPage('lacesPage')">
+                        Laces
+                    </button>
+
+                    <button class="menu-button" onclick="showPage('solePage')">
+                        Sole
+                    </button>
+
                 </section>
 
                 <section class="panel-group">
+
                     <h2>Motion</h2>
+
                     <div class="toggle-row">
                         <label for="autoRotateToggle">Auto Rotate</label>
                         <input id="autoRotateToggle" type="checkbox" checked>
                     </div>
+
                     <div class="control">
                         <label for="rotateSpeedInput">Speed</label>
-                        <input id="rotateSpeedInput" type="range" min="0" max="0.02" step="0.0005" value="0.0035">
+
+                        <input
+                            id="rotateSpeedInput"
+                            type="range"
+                            min="0"
+                            max="0.02"
+                            step="0.0005"
+                            value="0.0035"
+                        >
                     </div>
+
                 </section>
 
                 <section class="panel-group">
+
                     <h2>Material</h2>
+
                     <div class="control">
+
                         <label for="materialSelect">Finish</label>
+
                         <select id="materialSelect">
                             <option value="leather">Leather</option>
                             <option value="matte">Matte</option>
                             <option value="gloss">Gloss</option>
                             <option value="rubber">Rubber</option>
                         </select>
+
                     </div>
+
                 </section>
-            </aside>
-        </div>
-        <div class="viewport-zone">
-            <div id="sceneViewport"></div>
-        </div>
+
+            </div>
+
+
+            <!-- BODY PAGE -->
+            <div id="bodyPage" class="menu-page">
+
+                <button class="back-button" onclick="showPage('mainPage')">
+                    ← Back
+                </button>
+
+                <p class="eyebrow">Customise</p>
+
+                <h1>Shoe Body</h1>
+
+                <p>Select a shoe body option.</p>
+
+                <section class="panel-group">
+
+                    <h2>Body Options</h2>
+
+                    <button class="option-button">Body Option 1</button>
+                    <button class="option-button">Body Option 2</button>
+                    <button class="option-button">Body Option 3</button>
+                    <button class="option-button">Body Option 4</button>
+
+                </section>
+
+                <section class="panel-group">
+
+                    <h2>Body Colour</h2>
+
+                    <div class="control">
+                        <label for="shoeColorInput">Upper</label>
+                        <input id="shoeColorInput" type="color" value="#d84a3a">
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- LACES PAGE -->
+            <div id="lacesPage" class="menu-page">
+
+                <button class="back-button" onclick="showPage('mainPage')">
+                    ← Back
+                </button>
+
+                <p class="eyebrow">Customise</p>
+
+                <h1>Laces</h1>
+
+                <p>Select a lace option.</p>
+
+                <section class="panel-group">
+
+                    <h2>Lace Options</h2>
+
+                    <button class="option-button">Laces Option 1</button>
+                    <button class="option-button">Laces Option 2</button>
+                    <button class="option-button">Laces Option 3</button>
+                    <button class="option-button">Laces Option 4</button>
+
+                </section>
+
+                <section class="panel-group">
+
+                    <h2>Lace Colour</h2>
+
+                    <div class="control">
+                        <label for="laceColorInput">Laces</label>
+                        <input id="laceColorInput" type="color" value="#202020">
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- SOLE PAGE -->
+            <div id="solePage" class="menu-page">
+
+                <button class="back-button" onclick="showPage('mainPage')">
+                    ← Back
+                </button>
+
+                <p class="eyebrow">Customise</p>
+
+                <h1>Sole</h1>
+
+                <p>Select a sole option.</p>
+
+                <section class="panel-group">
+
+                    <h2>Sole Options</h2>
+
+                    <button class="option-button">Sole Option 1</button>
+                    <button class="option-button">Sole Option 2</button>
+                    <button class="option-button">Sole Option 3</button>
+                    <button class="option-button">Sole Option 4</button>
+
+                </section>
+
+                <section class="panel-group">
+
+                    <h2>Sole Colour</h2>
+
+                    <div class="control">
+                        <label for="soleColorInput">Sole</label>
+                        <input id="soleColorInput" type="color" value="#f2f2ec">
+                    </div>
+
+                </section>
+
+            </div>
+
+        </aside>
+
     </div>
-    <script src="setup.js"></script>
-    <script src="loadModel.js"></script>
-    <script src="build.js"></script>
-    <script src="animate.js"></script>
-    <script src="run.js"></script>
+
+    <div class="viewport-zone">
+        <div id="sceneViewport"></div>
+    </div>
+
+</div>
+
+
+<script>
+
+    function showPage(pageId){
+
+        const pages = document.querySelectorAll(".menu-page");
+
+        pages.forEach(function(page){
+            page.classList.remove("active");
+        });
+
+        document.getElementById(pageId).classList.add("active");
+    }
+
+</script>
+
+<script src="setup.js"></script>
+<script src="loadModel.js"></script>
+<script src="build.js"></script>
+<script src="animate.js"></script>
+<script src="run.js"></script>
+
 </body>
 </html>

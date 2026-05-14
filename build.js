@@ -79,6 +79,9 @@ function applySettings(){
     recolorModelPart(streewearBody, shoeSettings.shoeColor, preset.body.roughness, preset.body.metalness);
     recolorModelPart(streewearLaces, shoeSettings.laceColor, preset.laces.roughness, preset.laces.metalness);
     recolorModelPart(streetwearSole, shoeSettings.soleColor, preset.sole.roughness, preset.sole.metalness);
+
+    recolorModelPart(dressBody, shoeSettings.laceColor, preset.laces.roughness, preset.laces.metalness);
+    recolorModelPart(dressSole, shoeSettings.soleColor, preset.sole.roughness, preset.sole.metalness);
 }
 
 function alignShoeToBase(){
