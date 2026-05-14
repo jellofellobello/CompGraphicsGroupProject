@@ -185,7 +185,7 @@ function buildGui(){
 function addShapes(){
     buildRotatingBase();
     shoeGroup = new THREE.Group();
-    shoeGroup.position.set(0, 0, 3);
+    shoeGroup.position.set(0, -5, 3);
     scene.add(shoeGroup);
     loadModels();
 }
