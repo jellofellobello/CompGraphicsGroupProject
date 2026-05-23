@@ -53,7 +53,7 @@ function loadModels(){
     ];
 
     var soleOffsets = [
-        { x: 0, y: 0, z: 0 },
+        { x: 3, y: 3, z: 0 },
         { x: 1.5, y: 0, z: -0.5 }
     ];
 
@@ -62,6 +62,13 @@ function loadModels(){
         modelLoader.load(loadAllBody[i], function(gltf){
             shoeModelBody[i] = gltf.scene;
             setupModel(shoeModelBody[i]);
+
+            shoeModelBody[i].position.set(
+                bodyOffsets[i].x,
+                bodyOffsets[i].y,
+                bodyOffsets[i].z
+            );
+
             checkAllLoaded();
         });
     }
