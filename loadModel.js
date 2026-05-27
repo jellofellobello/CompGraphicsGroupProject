@@ -10,7 +10,8 @@ var shoeModelSole = [];
 
 var loadAllBody = [
     "Assets/Models/AngeloShoe/AngeloBody.glb",
-    "Assets/Models/AngeloDress/AngeloDressBody.glb"
+    "Assets/Models/AngeloDress/AngeloDressBody.glb",
+    "Assets/Models/AngeloComfort/ComfortBodyNoLace.glb"
 ];
 
 var loadAllLaces = [
@@ -19,7 +20,8 @@ var loadAllLaces = [
 
 var loadAllSole = [
     "Assets/Models/AngeloShoe/AngeloSole.glb",
-    "Assets/Models/AngeloDress/AngeloDressSole.glb"
+    "Assets/Models/AngeloDress/AngeloDressSole.glb",
+    "Assets/Models/AngeloComfort/ComfortSole.glb"
 ];
 
 function loadModels(){
@@ -63,11 +65,11 @@ function loadModels(){
             shoeModelBody[i] = gltf.scene;
             setupModel(shoeModelBody[i]);
 
-            shoeModelBody[i].position.set(
-                bodyOffsets[i].x,
-                bodyOffsets[i].y,
-                bodyOffsets[i].z
-            );
+            // shoeModelBody[i].position.set(
+            //     bodyOffsets[i].x,
+            //     bodyOffsets[i].y,
+            //     bodyOffsets[i].z
+            // );
 
             checkAllLoaded();
         });
