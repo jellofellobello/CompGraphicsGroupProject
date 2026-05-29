@@ -4,13 +4,15 @@ var shoeGroup;
 var autoRotateEnabled = true;
 var autoRotateSpeed = 0.0035;
 var dragRotationVelocity = 0;
+var sizeValue = 1;
 
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
     shoeColor: "#d84a3a",
     soleColor: "#f2f2ec",
     laceColor: "#202020",
-    material: "leather"
+    material: "leather",
+    shoeSize: 10
 };
 
 // UTILS
@@ -179,6 +181,8 @@ function buildGui(){
     var autoRotateToggle = document.getElementById("autoRotateToggle");
     var rotateSpeedInput = document.getElementById("rotateSpeedInput");
     var materialSelect = document.getElementById("materialSelect");
+    var sizeInput = document.getElementById("sizeInput");
+    var sizeDisplay = document.getElementById("sizeDisplay");
 
     shoeColorInput.value = shoeSettings.shoeColor;
     laceColorInput.value = shoeSettings.laceColor;
@@ -186,6 +190,8 @@ function buildGui(){
     autoRotateToggle.checked = autoRotateEnabled;
     rotateSpeedInput.value = autoRotateSpeed;
     materialSelect.value = shoeSettings.material;
+    sizeInput.value = shoeSettings.shoeSize;
+    sizeDisplay.textContent = "Size " + shoeSettings.shoeSize;
 
     shoeColorInput.addEventListener("input", function(event){
         shoeSettings.shoeColor = event.target.value;
@@ -213,6 +219,13 @@ function buildGui(){
     materialSelect.addEventListener("change", function(event){
         shoeSettings.material = event.target.value;
         applySettings();
+    });
+
+    sizeInput.addEventListener("input", function(event){
+        shoeSettings.shoeSize = Number(event.target.value);
+        sizeValue = shoeSettings.shoeSize / 10;
+        sizeDisplay.textContent = "Size " + shoeSettings.shoeSize;
+        
     });
 }
 
