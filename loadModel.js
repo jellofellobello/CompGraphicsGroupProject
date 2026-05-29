@@ -129,6 +129,29 @@ function loadModels(){
 
 }
 
+function updateSize(){
+
+    for (var i = 0; i < shoeModelBody.length; i++){
+        if (shoeModelBody[i]){
+            shoeModelBody[i].scale.set(3, 3 ,3* sizeValue);
+        }
+    }
+
+    for (var i = 0; i < shoeModelLaces.length; i++){
+        if (shoeModelLaces[i]){
+            shoeModelLaces[i].scale.set(3, 3,3* sizeValue);
+        }
+    }
+
+    for (var i = 0; i < shoeModelSole.length; i++){
+        if (shoeModelSole[i]){
+            shoeModelSole[i].scale.set(3, 3,3* sizeValue);
+        }
+    }
+
+    alignShoeToBase();
+}
+
 function updateShoeModel(){
     if (!shoeGroup) return;
 

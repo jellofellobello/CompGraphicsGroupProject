@@ -225,7 +225,7 @@ function buildGui(){
         shoeSettings.shoeSize = Number(event.target.value);
         sizeValue = shoeSettings.shoeSize / 10;
         sizeDisplay.textContent = "Size " + shoeSettings.shoeSize;
-        
+        updateSize();
     });
 }
 
