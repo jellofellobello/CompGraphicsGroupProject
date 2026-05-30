@@ -9,19 +9,21 @@ var shoeModelLaces = [];
 var shoeModelSole = [];
 
 var loadAllBody = [
-    "Assets/Models/AngeloShoe/AngeloBody.glb",
-    "Assets/Models/AngeloDress/AngeloDressBody.glb",
-    "Assets/Models/AngeloComfort/ComfortBodyNoLace.glb"
+    "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace.glb",
+    "Assets/Models/Dress_Assets/Body2_D.glb",
+    "Assets/Models/ComfortSneakers_Assets/Body3_CS_NoLace.glb"
+    // ,
+    // "Assets/Models/ComfortSneakers_Assets/Body3_ComfortSneakers_Lace1.glb"
 ];
 
 var loadAllLaces = [
-    "Assets/Models/AngeloShoe/AngeloLaces.glb"
+    "Assets/Models/AthleticSneakers_Assets/Laces1_AS.glb"
 ];
 
 var loadAllSole = [
-    "Assets/Models/AngeloShoe/AngeloSole.glb",
-    "Assets/Models/AngeloDress/AngeloDressSole.glb",
-    "Assets/Models/AngeloComfort/ComfortSole.glb"
+    "Assets/Models/AthleticSneakers_Assets/Sole1_AS.glb",
+    "Assets/Models/Dress_Assets/Sole2_D.glb",
+    "Assets/Models/ComfortSneakers_Assets/Sole3_CS_Slim.glb"
 ];
 
 function loadModels(){
