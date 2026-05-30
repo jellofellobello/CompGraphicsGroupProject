@@ -11,7 +11,8 @@ var shoeModelSole = [];
 var loadAllBody = [
     "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace.glb",
     "Assets/Models/Dress_Assets/Body2_D.glb",
-    "Assets/Models/ComfortSneakers_Assets/Body3_CS_NoLace.glb"
+    "Assets/Models/ComfortSneakers_Assets/Body3_CS_NoLace.glb",
+    "Assets/Models/Boot_Assets/BootBody.glb"
     // ,
     // "Assets/Models/ComfortSneakers_Assets/Body3_ComfortSneakers_Lace1.glb"
 ];
@@ -23,10 +24,11 @@ var loadAllLaces = [
 var loadAllSole = [
     "Assets/Models/AthleticSneakers_Assets/Sole1_AS.glb",
     "Assets/Models/Dress_Assets/Sole2_D.glb",
-    "Assets/Models/ComfortSneakers_Assets/Sole3_CS_Slim.glb"
+    "Assets/Models/ComfortSneakers_Assets/Sole3_CS_Slim.glb",
+    "Assets/Models/Boot_Assets/BootSole.glb"
 ];
 
-function loadModels(){
+function loadModels() {
     var loadedCount = 0;
 
     var totalModels =
@@ -34,10 +36,10 @@ function loadModels(){
         loadAllLaces.length +
         loadAllSole.length;
 
-    function checkAllLoaded(){
+    function checkAllLoaded() {
         loadedCount++;
 
-        if (loadedCount === totalModels){
+        if (loadedCount === totalModels) {
             shoeGroup.add(shoeModelBody[bodySelect]);
             shoeGroup.add(shoeModelLaces[laceSelect]);
             shoeGroup.add(shoeModelSole[soleSelect]);
@@ -62,8 +64,8 @@ function loadModels(){
     ];
 
 
-    for (let i = 0; i < loadAllBody.length; i++){
-        modelLoader.load(loadAllBody[i], function(gltf){
+    for (let i = 0; i < loadAllBody.length; i++) {
+        modelLoader.load(loadAllBody[i], function (gltf) {
             shoeModelBody[i] = gltf.scene;
             setupModel(shoeModelBody[i]);
 
@@ -77,16 +79,16 @@ function loadModels(){
         });
     }
 
-    for (let i = 0; i < loadAllLaces.length; i++){
-        modelLoader.load(loadAllLaces[i], function(gltf){
+    for (let i = 0; i < loadAllLaces.length; i++) {
+        modelLoader.load(loadAllLaces[i], function (gltf) {
             shoeModelLaces[i] = gltf.scene;
             setupModel(shoeModelLaces[i]);
             checkAllLoaded();
         });
     }
 
-    for (let i = 0; i < loadAllSole.length; i++){
-        modelLoader.load(loadAllSole[i], function(gltf){
+    for (let i = 0; i < loadAllSole.length; i++) {
+        modelLoader.load(loadAllSole[i], function (gltf) {
             shoeModelSole[i] = gltf.scene;
             setupModel(shoeModelSole[i]);
             checkAllLoaded();
@@ -131,33 +133,33 @@ function loadModels(){
 
 }
 
-function updateSize(){
+function updateSize() {
 
-    for (var i = 0; i < shoeModelBody.length; i++){
-        if (shoeModelBody[i]){
-            shoeModelBody[i].scale.set(3, 3 ,3* sizeValue);
+    for (var i = 0; i < shoeModelBody.length; i++) {
+        if (shoeModelBody[i]) {
+            shoeModelBody[i].scale.set(3, 3, 3 * sizeValue);
         }
     }
 
-    for (var i = 0; i < shoeModelLaces.length; i++){
-        if (shoeModelLaces[i]){
-            shoeModelLaces[i].scale.set(3, 3,3* sizeValue);
+    for (var i = 0; i < shoeModelLaces.length; i++) {
+        if (shoeModelLaces[i]) {
+            shoeModelLaces[i].scale.set(3, 3, 3 * sizeValue);
         }
     }
 
-    for (var i = 0; i < shoeModelSole.length; i++){
-        if (shoeModelSole[i]){
-            shoeModelSole[i].scale.set(3, 3,3* sizeValue);
+    for (var i = 0; i < shoeModelSole.length; i++) {
+        if (shoeModelSole[i]) {
+            shoeModelSole[i].scale.set(3, 3, 3 * sizeValue);
         }
     }
 
     alignShoeToBase();
 }
 
-function updateShoeModel(){
+function updateShoeModel() {
     if (!shoeGroup) return;
 
-    while (shoeGroup.children.length > 0){
+    while (shoeGroup.children.length > 0) {
         shoeGroup.remove(shoeGroup.children[0]);
     }
 
@@ -169,7 +171,7 @@ function updateShoeModel(){
     applySettings();
 }
 
-function setupModel(model){
+function setupModel(model) {
     model.scale.set(3, 3, 3);
     model.position.set(0, 0, 0);
 }
