@@ -1,30 +1,30 @@
 // Global time variable for customiser animation.
 var time = 0;
 
-function animateShoe(){
+function animateShoe() {
     if (!shoeGroup) return;
 
-    if (!isDraggingShoe){
-        if (autoRotateEnabled){
+    if (!isDraggingShoe) {
+        if (autoRotateEnabled) {
             shoeGroup.rotation.y += autoRotateSpeed;
         }
 
         shoeGroup.rotation.y += dragRotationVelocity;
         dragRotationVelocity *= 0.92;
 
-        if (Math.abs(dragRotationVelocity) < 0.00005){
+        if (Math.abs(dragRotationVelocity) < 0.00005) {
             dragRotationVelocity = 0;
         }
     }
 }
 
-function animateRotatingBase(){
+function animateRotatingBase() {
     if (!rotatingBase) return;
     rotatingBase.rotation.y += 0.0022;
 }
 
 /* Main animation loop. */
-function animate(){
+function animate() {
     requestAnimationFrame(animate);
 
     time += 0.01;
