@@ -495,6 +495,9 @@
 
     function setBody(value){
         bodySelect = value;
+        if (colourCounter == 0) {
+            shoeSettings.shoeColor = shoeBodyColourSet();
+        }
         updateShoeModel();
         console.log("Body:", bodySelect);
     }
@@ -507,6 +510,9 @@
 
     function setSole(value){
         soleSelect = value;
+        if (colourCounter == 0) {
+            shoeSettings.soleColor = shoeSoleColourSet();
+        }
         updateShoeModel();
         console.log("Sole:", soleSelect);
     }

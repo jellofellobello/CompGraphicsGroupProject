@@ -5,15 +5,52 @@ var autoRotateEnabled = true;
 var autoRotateSpeed = 0.0035;
 var dragRotationVelocity = 0;
 var sizeValue = 1;
+var colourCounter = 0;
 
 // Custom settings (TODO: expand as needed for more customisation options)
 var shoeSettings = {
-    shoeColor: "#d84a3a",
-    soleColor: "#f2f2ec",
+    shoeColor: shoeBodyColourSet(),
+    soleColor: shoeSoleColourSet(),
     laceColor: "#202020",
     material: "leather",
     shoeSize: 10
 };
+
+function shoeBodyColourSet() {
+    if (bodySelect == 0) {
+        return "#d84a3a";
+    }
+    if (bodySelect == 1) {
+        return "#745956";
+    }
+    if (bodySelect == 2) {
+        return "#5077e5";
+    }
+    if (bodySelect == 3) {
+        return "#97775d";
+    }
+    else {
+        return "#a3a3a3";
+    }
+}
+
+function shoeSoleColourSet() {
+    if (bodySelect == 0) {
+        return "#f2f2ec";
+    }
+    if (bodySelect == 1) {
+        return "#4f3835";
+    }
+    if (bodySelect == 2) {
+        return "#f2f2ec";
+    }
+    if (bodySelect == 3) {
+        return "#2b2623";
+    }
+    else {
+        return "#a3a3a3";
+    }
+}
 
 // UTILS
 function clamp(value, min, max){
@@ -107,6 +144,15 @@ function applySettings(){
             shoeSettings.soleColor,
             preset.sole.roughness,
             preset.sole.metalness
+        );
+    }
+
+    for (var i = 0; i < dressLaceExtension.length; i++){
+        recolorModelPart(
+            dressLaceExtension[i],
+            shoeSettings.shoeColor,
+            preset.body.roughness,
+            preset.body.metalness
         );
     }
 
@@ -215,6 +261,12 @@ function buildGui(){
         sizeValue = shoeSettings.shoeSize / 10;
         sizeDisplay.textContent = "Size " + shoeSettings.shoeSize;
         updateSize();
+    });
+
+    shoeColorInput.addEventListener("input", function(event){
+        shoeSettings.shoeColor = event.target.value;
+        colourCounter = 1;
+        applySettings();
     });
 }
 

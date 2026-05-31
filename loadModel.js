@@ -49,8 +49,8 @@ var loadAllSole = [
 ];
 
 var loadDressExt = [
-    "Assets/Models/Dress_Assets/Body2_LaceExtension_Lace1.glb",
-    "Assets/Models/Dress_Assets/Body2_LaceExtension_Lace1.glb"
+    "Assets/Models/Dress_Assets/Body2_D_LaceExtension_Lace1.glb",
+    "Assets/Models/Dress_Assets/Body2_D_LaceExtension_Lace1.glb"
 ];
 
 function loadModels() {
@@ -65,10 +65,23 @@ function loadModels() {
     function checkAllLoaded() {
         loadedCount++;
 
+        function addDressExtensionIfNeeded() {
+            if (bodySelect === 1) {
+                if (laceSelect === 0 && dressLaceExtension[0]) {
+                    shoeGroup.add(dressLaceExtension[0]);
+                }
+
+                if (laceSelect === 1 && dressLaceExtension[1]) {
+                    shoeGroup.add(dressLaceExtension[1]);
+                }
+            }
+        }
+
         if (loadedCount === totalModels) {
             shoeGroup.add(shoeModelBody[getActualBodyIndex()]);
             shoeGroup.add(shoeModelLaces[getActualLaceIndex()]);
             shoeGroup.add(shoeModelSole[getActualSoleIndex()]);
+            addDressExtensionIfNeeded();
 
             alignShoeToBase();
             applySettings();
@@ -96,6 +109,14 @@ function loadModels() {
         modelLoader.load(loadAllSole[i], function (gltf) {
             shoeModelSole[i] = gltf.scene;
             setupModel(shoeModelSole[i]);
+            checkAllLoaded();
+        });
+    }
+
+    for (let i = 0; i < loadDressExt.length; i++) {
+        modelLoader.load(loadDressExt[i], function (gltf) {
+            dressLaceExtension[i] = gltf.scene;
+            setupModel(dressLaceExtension[i]);
             checkAllLoaded();
         });
     }
@@ -158,6 +179,12 @@ function updateSize() {
         }
     }
 
+    for (var i = 0; i < dressLaceExtension.length; i++) {
+        if (dressLaceExtension[i]) {
+            dressLaceExtension[i].scale.set(3, 3, 3 * sizeValue);
+        }
+    }
+
     alignShoeToBase();
 }
 
@@ -198,6 +225,16 @@ function getActualLaceIndex() {
     return realLaceSelect;
 }
 
+function addDressExtensionIfNeeded() {
+    if (bodySelect === 1 && laceSelect === 0 && dressLaceExtension[0]) {
+        shoeGroup.add(dressLaceExtension[0]);
+    }
+
+    if (bodySelect === 1 && laceSelect === 1 && dressLaceExtension[1]) {
+        shoeGroup.add(dressLaceExtension[1]);
+    }
+}
+
 function updateShoeModel() {
     if (!shoeGroup) return;
 
@@ -209,11 +246,7 @@ function updateShoeModel() {
     shoeGroup.add(shoeModelLaces[getActualLaceIndex()]);
     shoeGroup.add(shoeModelSole[getActualSoleIndex()]);
 
-    // if (bodySelect == 1) {
-    //     if (laceSelect == 1) {
-    //         shoeGroup.add(S)
-    //     }
-    // }
+    addDressExtensionIfNeeded();
 
     alignShoeToBase();
     applySettings();
