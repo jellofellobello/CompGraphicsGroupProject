@@ -127,17 +127,6 @@ function alignShoeToBase(){
     var center = new THREE.Vector3();
     bounds.getCenter(center);
 
-    var baseTopY = -3.275;
-    var offsetX = center.x - shoeGroup.position.x;
-    var offsetZ = center.z - shoeGroup.position.z;
-    var offsetY = bounds.min.y - baseTopY;
-
-    // for (var i = 0; i < shoeGroup.children.length; i++){
-    //     shoeGroup.children[i].position.x -= offsetX;
-    //     shoeGroup.children[i].position.z -= offsetZ;
-    //     shoeGroup.children[i].position.y -= offsetY;
-    // }
-
     shoeGroup.position.set(0, 3, 0);
     shoeGroup.updateMatrixWorld(true);
 }

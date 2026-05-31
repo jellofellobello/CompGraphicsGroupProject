@@ -11,21 +11,39 @@ var shoeModelSole = [];
 var loadAllBody = [
     "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace_High.glb",
     "Assets/Models/Dress_Assets/Body2_D.glb",
+    "Assets/Models/ComfortSneakers_Assets/Body3_CS_Lace1.glb",
+    "Assets/Models/Boot_Assets/Body4_Boot_LaceVer.glb",
+
     "Assets/Models/ComfortSneakers_Assets/Body3_CS_NoLace.glb",
-    "Assets/Models/Boot_Assets/Body4_Boot.glb"
-    // ,
-    // "Assets/Models/ComfortSneakers_Assets/Body3_ComfortSneakers_Lace1.glb"
+    "Assets/Models/Boot_Assets/Body4_Boot_NoLace.glb",
+    
 ];
 
 var loadAllLaces = [
-    "Assets/Models/AthleticSneakers_Assets/Laces1_AS.glb"
+    //Load all Lace 1 assets
+    "Assets/Models/Laces/RegularLace_Assets/Laces1_for_AS.glb",
+
+    
+    "Assets/Models/Laces/RegularLace_Assets/Laces1_for_Dress.glb",
+    "Assets/Models/Laces/RegularLace_Assets/Laces1_for_CS.glb",
+    
+    "Assets/Models/Laces/RegularLace_Assets/Laces1_for_Boot.glb",
+
+    //load all Lace 2 assets
+    "Assets/Models/Laces/ThinLace_Assets/Laces2_for_AS.glb",
+    "Assets/Models/Laces/ThinLace_Assets/Laces2_for_Dress.glb",
+    "Assets/Models/Laces/ThinLace_Assets/Laces2_for_CS.glb",
+    "Assets/Models/Laces/ThinLace_Assets/Laces2_for_Boot.glb"  
 ];
 
 var loadAllSole = [
     "Assets/Models/AthleticSneakers_Assets/Sole1_AS.glb",
     "Assets/Models/Dress_Assets/Sole2_D.glb",
-    "Assets/Models/ComfortSneakers_Assets/Sole3_CS_Slim.glb",
-    "Assets/Models/Boot_Assets/Sole4_Boot.glb"
+    "Assets/Models/ComfortSneakers_Assets/Sole3/Sole3_CS_Wide.glb",
+    "Assets/Models/Boot_Assets/Sole4_Boot.glb",
+
+    //Wide sole for Body type 3
+    "Assets/Models/ComfortSneakers_Assets/Sole3/Sole3_CS_Slim.glb"
 ];
 
 function loadModels() {
@@ -40,40 +58,19 @@ function loadModels() {
         loadedCount++;
 
         if (loadedCount === totalModels) {
-            shoeGroup.add(shoeModelBody[bodySelect]);
-            shoeGroup.add(shoeModelLaces[laceSelect]);
-            shoeGroup.add(shoeModelSole[soleSelect]);
+            shoeGroup.add(shoeModelBody[getActualBodyIndex()]);
+            shoeGroup.add(shoeModelLaces[getActualLaceIndex()]);
+            shoeGroup.add(shoeModelSole[getActualSoleIndex()]);
 
             alignShoeToBase();
             applySettings();
         }
     }
 
-    var bodyOffsets = [
-        { x: 0, y: 0, z: 0 },
-        { x: 1.5, y: 0, z: -0.5 }
-    ];
-
-    var laceOffsets = [
-        { x: 0, y: 0, z: 0 }
-    ];
-
-    var soleOffsets = [
-        { x: 3, y: 3, z: 0 },
-        { x: 1.5, y: 0, z: -0.5 }
-    ];
-
-
     for (let i = 0; i < loadAllBody.length; i++) {
         modelLoader.load(loadAllBody[i], function (gltf) {
             shoeModelBody[i] = gltf.scene;
             setupModel(shoeModelBody[i]);
-
-            // shoeModelBody[i].position.set(
-            //     bodyOffsets[i].x,
-            //     bodyOffsets[i].y,
-            //     bodyOffsets[i].z
-            // );
 
             checkAllLoaded();
         });
@@ -156,6 +153,43 @@ function updateSize() {
     alignShoeToBase();
 }
 
+function getActualBodyIndex() {
+    var realBodySelect = bodySelect;
+
+    // if (bodySelect == 2) {
+    //     realBodySelect = 4;
+    // }
+    // if (bodySelect == 3) {
+    //     realBodySelect = 5;
+    // }
+
+    return realBodySelect;
+}
+
+function getActualSoleIndex() {
+    if (bodySelect === 2 && soleSelect === 2) {
+        return 4;
+    }
+
+    var realSoleSelect = soleSelect;
+
+    return realSoleSelect;
+}
+
+function getActualLaceIndex() {
+    var realLaceSelect = laceSelect;
+
+    if (laceSelect == 0) {
+        realLaceSelect = (1 * bodySelect);
+    }
+
+    if (laceSelect == 1) {
+        realLaceSelect = ((1 * bodySelect) + 4);
+    }
+
+    return realLaceSelect;
+}
+
 function updateShoeModel() {
     if (!shoeGroup) return;
 
@@ -163,9 +197,9 @@ function updateShoeModel() {
         shoeGroup.remove(shoeGroup.children[0]);
     }
 
-    shoeGroup.add(shoeModelBody[bodySelect]);
-    shoeGroup.add(shoeModelLaces[laceSelect]);
-    shoeGroup.add(shoeModelSole[soleSelect]);
+    shoeGroup.add(shoeModelBody[getActualBodyIndex()]);
+    shoeGroup.add(shoeModelLaces[getActualLaceIndex()]);
+    shoeGroup.add(shoeModelSole[getActualSoleIndex()]);
 
     alignShoeToBase();
     applySettings();
