@@ -8,6 +8,8 @@ var shoeModelBody = [];
 var shoeModelLaces = [];
 var shoeModelSole = [];
 
+var dressLaceExtension = [];
+
 var loadAllBody = [
     "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace_High.glb",
     "Assets/Models/Dress_Assets/Body2_D.glb",
@@ -46,13 +48,19 @@ var loadAllSole = [
     "Assets/Models/ComfortSneakers_Assets/Sole3/Sole3_CS_Slim.glb"
 ];
 
+var loadDressExt = [
+    "Assets/Models/Dress_Assets/Body2_LaceExtension_Lace1.glb",
+    "Assets/Models/Dress_Assets/Body2_LaceExtension_Lace1.glb"
+];
+
 function loadModels() {
     var loadedCount = 0;
 
     var totalModels =
         loadAllBody.length +
         loadAllLaces.length +
-        loadAllSole.length;
+        loadAllSole.length +
+        loadDressExt.length;
 
     function checkAllLoaded() {
         loadedCount++;
@@ -200,6 +208,12 @@ function updateShoeModel() {
     shoeGroup.add(shoeModelBody[getActualBodyIndex()]);
     shoeGroup.add(shoeModelLaces[getActualLaceIndex()]);
     shoeGroup.add(shoeModelSole[getActualSoleIndex()]);
+
+    // if (bodySelect == 1) {
+    //     if (laceSelect == 1) {
+    //         shoeGroup.add(S)
+    //     }
+    // }
 
     alignShoeToBase();
     applySettings();
