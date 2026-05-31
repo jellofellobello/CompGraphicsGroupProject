@@ -9,10 +9,10 @@ var shoeModelLaces = [];
 var shoeModelSole = [];
 
 var loadAllBody = [
-    "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace.glb",
+    "Assets/Models/AthleticSneakers_Assets/Body1_AS_NoLace_High.glb",
     "Assets/Models/Dress_Assets/Body2_D.glb",
     "Assets/Models/ComfortSneakers_Assets/Body3_CS_NoLace.glb",
-    "Assets/Models/Boot_Assets/BootBody.glb"
+    "Assets/Models/Boot_Assets/Body4_Boot.glb"
     // ,
     // "Assets/Models/ComfortSneakers_Assets/Body3_ComfortSneakers_Lace1.glb"
 ];
@@ -25,7 +25,7 @@ var loadAllSole = [
     "Assets/Models/AthleticSneakers_Assets/Sole1_AS.glb",
     "Assets/Models/Dress_Assets/Sole2_D.glb",
     "Assets/Models/ComfortSneakers_Assets/Sole3_CS_Slim.glb",
-    "Assets/Models/Boot_Assets/BootSole.glb"
+    "Assets/Models/Boot_Assets/Sole4_Boot.glb"
 ];
 
 function loadModels() {
